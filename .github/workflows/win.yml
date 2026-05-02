@@ -9,10 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install SDL2
-      run: vcpkg install sdl2
-
-    - name: Configure
+    - name: Configure CMake
       run: cmake -B build
 
     - name: Build

@@ -1,17 +1,9 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.10)
 project(Blueinput)
 
 set(CMAKE_CXX_STANDARD 17)
 
-include(FetchContent)
-
-FetchContent_Declare(
-    SDL2
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-    GIT_TAG release-2.30.9
-)
-
-FetchContent_MakeAvailable(SDL2)
+find_package(SDL2 REQUIRED)
 
 include_directories(include)
 

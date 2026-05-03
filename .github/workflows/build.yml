@@ -1,14 +1,14 @@
-name: Blueinput Build
+name: Build Blueinput
 
-on:
-  push:
-  pull_request:
+on: [push]
 
 jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
 
-  windows:
-    name: Windows Build (.exe)
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
@@ -17,18 +17,17 @@ jobs:
       run: cmake -B build
 
     - name: Build
-      run: cmake --build build --config Release
+      run: cmake --build buildname: Build Blueinput
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: Blueinput-windows
-        path: build/Release/
+on: [push]
 
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
 
-  mac:
-    name: macOS Build (.app + .dmg)
-    runs-on: macos-latest
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
@@ -38,18 +37,3 @@ jobs:
 
     - name: Build
       run: cmake --build build
-
-    - name: Create .app bundle
-      run: |
-        mkdir -p Blueinput.app/Contents/MacOS
-        cp build/Blueinput Blueinput.app/Contents/MacOS/
-
-    - name: Create DMG
-      run: |
-        hdiutil create Blueinput.dmg -srcfolder Blueinput.app -ov
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: Blueinput-mac
-        path: Blueinput.dmg

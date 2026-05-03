@@ -3,9 +3,6 @@ project(Blueinput)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(Blueinput
-    src/main.cpp
-    src/app.cpp
-    src/input.cpp
-    src/network.cpp
-)
+file(GLOB SOURCES "src/*.cpp")
+
+add_executable(Blueinput ${SOURCES})

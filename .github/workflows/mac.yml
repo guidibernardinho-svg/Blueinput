@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Configure CMake
+    - name: Configure
       run: cmake -B build
 
     - name: Build
